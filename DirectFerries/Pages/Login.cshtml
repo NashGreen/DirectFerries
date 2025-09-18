@@ -1,0 +1,66 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title h4 mb-0">Login</h1>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger" role="alert" aria-live="polite">
+                        @Model.ErrorMessage
+                    </div>
+                }
+
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="Username"
+                               value="@Model.Username" required aria-describedby="usernameHelp">
+                        <div id="usernameHelp" class="form-text">
+                            Use any username from dummyjson.com/users (e.g., emilys)
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="Password"
+                               value="@Model.Password" required aria-describedby="passwordHelp">
+                        <div id="passwordHelp" class="form-text">
+                            Use the corresponding password (e.g., emilyspass)
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100" @(Model.IsLoading ? "disabled" : "")>
+                        @if (Model.IsLoading)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            <span>Logging in...</span>
+                        }
+                        else
+                        {
+                            <span>Login</span>
+                        }
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <h2 class="h6">Sample Users from API:</h2>
+            <div class="alert alert-success" role="alert" aria-live="polite">
+                <ul class="list-unstyled small">
+                    <li><strong>emilys</strong>/emilyspass</li>
+                    <li><strong>michaelw</strong>/michaelwpass</li>
+                    <li><strong>oliviaw</strong>/oliviawpass</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
