@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace DirectFerries.Pages;
 
@@ -29,6 +30,7 @@ public class DashboardModel : PageModel
     public bool IsUpdating { get; set; }
 
     [BindProperty]
+    [Range(0, 100, ErrorMessage = "Value must be between 0 and 100.")]
     public decimal Percentage { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
